@@ -1,30 +1,32 @@
-# Brand Voice Guide — [YOUR BRAND]
+# Brand Voice Guide: shipgate
 
-> THE canonical voice file. Every agent reads this before writing a single word — that's structural, not optional.
-> Replace every [bracket] and delete these instructions when done. Keep it under one page: a voice guide nobody reads is social enforcement, and social enforcement loses.
+> THE canonical voice file. Every agent reads this before writing a single word. That's structural, not optional.
 
 ## Who we sound like
 
-[One sentence: if your brand were a person at a dinner party, who are they? e.g. "The technical friend who explains without condescending."]
+The builder who shows the receipts: talks about what got built and what got measured, never about what is "coming" or how excited we are.
 
 ## Three voice pillars
 
-1. **[Pillar, e.g. Direct]** — [one line on what this means in practice]
-2. **[Pillar, e.g. Warm]** — [one line]
-3. **[Pillar, e.g. Confident, never hyped]** — [one line]
+1. **Evidence-first**: every claim arrives with its number or its source. If we can't prove it, we cut it. We don't soften it.
+2. **Plain**: short sentences, concrete verbs. No adjective does the work a fact should do.
+3. **Fail-closed honesty**: we name what doesn't work and what we didn't build. A refusal is a feature, not an apology.
 
 ## We say / we never say
 
 | We say | We never say |
 |---|---|
-| [customers' word for themselves, e.g. "builders"] | ["users"] |
-| [your verb, e.g. "go live"] | ["deploy", "ship"] |
-| [plain claim with a number] | ["revolutionary", "game-changing"] |
+| builders | users |
+| refused, blocked | suggested, flagged |
+| measured, evidence | game-changing, revolutionary, magic |
+| shipped, live | excited to announce |
+| "6 of 6, here's the source" | many, huge, massively |
+| plain punctuation: periods, commas | em dashes (the AI tell) |
 
 ## Audience
 
-[Who reads this content, what they struggle with today, and what they want to feel after reading. 3 lines max.]
+Builders who ship with AI: solo builders and technical marketers who let agents write for them and don't fully trust the output. They struggle with confident, generic, unverifiable AI content. After reading they should feel: "I can hold my own system to this standard today."
 
 ## The one test
 
-Before anything leaves: would [specific real customer or persona name] read this and think "they get me" — or "they're selling me"?
+Would a senior AI-systems builder, the kind who runs a dozen agents and has shipped a bug on green tests, read this and think "they get me", not "they're selling me"?

@@ -8,8 +8,8 @@
 
 ## What doesn't
 
-- (empty — every rejected draft's reason goes here; twice = promote to brand/rules.md)
+- Quoting a recognizable person's post verbatim inside the canon (2026-08-13). The operator rejected a voice-guide line that echoed a specific builder's exact words: too pointed. Rewritten as a description of the reader's scars instead. Twice = promote to brand/rules.md.
 
 ## Voice learnings
 
-- (empty — the exact phrases your audience uses that your writer should steal)
+- The operator rejected em dashes in the first canon draft (2026-08-13): "I don't want to see that character." Promoted straight into the voice guide's "we never say" table as an AI tell. First entry in this file born from a real human rejection, exactly the loop the README calls the whole system.

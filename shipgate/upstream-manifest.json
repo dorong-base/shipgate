@@ -1,0 +1,20 @@
+{
+  "files": {
+    "CLAUDE.md": "da6c2890186617d10c02e2ae9d8ed84dfa2a1aff1fd9261019c8a6e7cb4bd407",
+    "README.md": "852c3055afecae918c801958715538e14c96a970c8461b08c741e89195d37b07",
+    "agents/brand-guardian.md": "386942682f2bb3e4e68f89b10feba7f5df62a11587a6e863f2b990f44053111c",
+    "agents/writer.md": "93ae34a9c0e257d9d5c3cbd1eca36cf0d472a8fcb1bf45bd26b41485e96cf485",
+    "brand/DESIGN.md": "6b3166e2a752249808c9e0981ee03ceb65eb9a9c37ed415ce909602f3b832828",
+    "brand/rules.md": "7b85af0fc9ff64599db9c7332db2de78596d952d136f5b53034c40edc36686e6",
+    "brand/voice-guide.md": "ace87311abb2c318a275678f706fcddf87a4ecf1ce19e12212df513169f0ad49",
+    "data/content-cards.example.jsonl": "ca9f1c4de50512eba92bd8428156d21f6dd02b7fc18be39b009b087cb090d580",
+    "hooks/log-run.sh": "09aa2c4b302eccf1ad4e20f48d80a51f626d861cf1a3825b4adb60eafeb822c3",
+    "memory/MEMORY.md": "5c2da7b4a9751ef7a0bbfa43397219342d788e19e57e775d74d85a89e1a91401",
+    "memory/patterns.md": "94641b3cdf91f1848d3374e543d633399d13c49c43830f3f039a600c524f7ecc",
+    "scorecard.md": "798a9d298835410ccf3a0b86e31c3cb378fb17a829d426e6c894cb46790ef1fd",
+    "skills/marketing-router/SKILL.md": "30cb120b177c5ea1897aaf895bdcc4b551800eb15c9ebb46846106345a133bed",
+    "skills/weekly-pulse/SKILL.md": "abbd9e2d1f7d6f50d52bc6e05a62915b005026a0b7e60d8d9f28343c118f024f"
+  },
+  "max_modified": 5,
+  "source": "blutrich/marketing-engineering-starter @ 2e643ce (v1.0)"
+}

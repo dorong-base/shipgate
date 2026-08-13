@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shipgate: No proof. No post.</title>
+<meta name="description" content="The live console of shipgate, a fail-closed harness for the marketing-engineering starter. Six gates that refuse instead of advising. Runs entirely in your browser, zero API keys.">
+<style>
+  /* Every color below resolves to a token in brand/DESIGN.md: on-brand by construction. */
+  :root {
+    --bg: #FAFAF8; --ink: #111111; --primary: #0055FF; --muted: #6B6B6B;
+    --sm: 8px; --md: 16px; --lg: 32px; --radius: 8px;
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 system-ui, sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: var(--lg) var(--md); }
+  h1 { font-size: 2rem; margin: 0; letter-spacing: -0.02em; }
+  h1 .no { color: var(--primary); }
+  .tag { color: var(--muted); margin: var(--sm) 0 0; }
+  .number { margin: var(--lg) 0; padding: var(--md); border: 2px solid var(--ink); border-radius: var(--radius); }
+  .number .label { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .number .value { font-size: 1.35rem; font-weight: 700; }
+  h2 { font-size: 1.15rem; margin: var(--lg) 0 var(--sm); }
+  .canon { font-family: var(--mono); font-size: .85rem; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  th { text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: var(--sm); border-bottom: 2px solid var(--ink); }
+  td { padding: var(--sm); border-bottom: 1px solid #E3E3DF; vertical-align: top; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; font-family: var(--mono); }
+  .pill.measured { background: var(--primary); color: var(--bg); }
+  .pill.shipped, .pill.go { background: var(--ink); color: var(--bg); }
+  .pill.gated, .pill.drafted, .pill.briefed { background: #E3E3DF; color: var(--ink); }
+  details summary { cursor: pointer; color: var(--primary); font-size: .85rem; }
+  details pre { font-family: var(--mono); font-size: .78rem; white-space: pre-wrap; color: var(--muted); margin: var(--sm) 0 0; }
+  .lab { display: grid; gap: var(--md); }
+  .panel { border: 1px solid #E3E3DF; border-radius: var(--radius); padding: var(--md); background: #fff; }
+  .panel h3 { margin: 0 0 4px; font-size: 1rem; }
+  .panel p { margin: 0 0 var(--sm); color: var(--muted); font-size: .88rem; }
+  textarea { width: 100%; min-height: 130px; font-family: var(--mono); font-size: .82rem; padding: var(--sm); border: 1px solid #D8D8D3; border-radius: var(--radius); background: var(--bg); resize: vertical; }
+  button { margin-top: var(--sm); padding: var(--sm) var(--md); border: 0; border-radius: var(--radius); background: var(--primary); color: var(--bg); font-weight: 600; font-size: .9rem; cursor: pointer; }
+  button:hover { opacity: .9; }
+  output { display: block; margin-top: var(--sm); font-family: var(--mono); font-size: .82rem; white-space: pre-wrap; }
+  .refused { color: #B3261E; font-weight: 700; }
+  .pass { color: #1B7F3B; font-weight: 700; }
+  footer { margin-top: var(--lg); padding-top: var(--md); border-top: 1px solid #E3E3DF; color: var(--muted); font-size: .85rem; }
+  a { color: var(--primary); }
+</style>
+</head>
+<body>
+<main>
+  <h1>shipgate <span class="no">/</span> No proof. No post.</h1>
+  <p class="tag">A fail-closed harness for the <a href="https://github.com/blutrich/marketing-engineering-starter">marketing-engineering starter</a>. Six gates that refuse instead of advising. This page runs the same <code>gates.mjs</code> the CLI runs, in your browser, with zero API keys.</p>
+
+  <div class="number">
+    <div class="label">The one number: grounding rate</div>
+    <div class="value" id="number">loading the cards…</div>
+  </div>
+
+  <h2>The board</h2>
+  <p class="canon" id="canon">checking the canon (G2)…</p>
+  <table id="board"><thead><tr><th>Card</th><th>Status</th><th>What</th><th>Score</th><th>Proof chain</th></tr></thead><tbody></tbody></table>
+
+  <h2>Try the gates yourself</h2>
+  <div class="lab">
+    <div class="panel">
+      <h3>G1: no brief, no draft</h3>
+      <p>This is the real brief of the launch post you may have arrived from. Delete the <code>cta:</code> line or a proof point's <code>source:</code>, then run it.</p>
+      <textarea id="brief-input" spellcheck="false"></textarea>
+      <button id="run-g1">Run G1</button>
+      <output id="out-g1"></output>
+    </div>
+    <div class="panel">
+      <h3>G4: no source, no claim</h3>
+      <p>Every number needs a [P#] marker resolving to a sourced proof point in the brief above. This draft has confident numbers and no sources. Fix it by adding [P1], or by cutting the claims.</p>
+      <textarea id="draft-input" spellcheck="false"></textarea>
+      <button id="run-g4">Run G4 against the brief</button>
+      <output id="out-g4"></output>
+    </div>
+    <div class="panel">
+      <h3>G3: the guardian blocks below 9</h3>
+      <p>The existing brand-guardian ends with a verdict block. shipgate parses it and refuses anything below 9, rejected, or malformed. Try changing the score to 9.5.</p>
+      <textarea id="verdict-input" spellcheck="false"></textarea>
+      <button id="run-g3">Run G3</button>
+      <output id="out-g3"></output>
+    </div>
+  </div>
+
+  <footer>
+    shipgate extends <a href="https://github.com/blutrich/marketing-engineering-starter">blutrich/marketing-engineering-starter</a> (MIT). The refusal philosophy follows <a href="https://github.com/blutrich/sdd-kit">sdd-kit</a>: when a gate is not met, the system does not advise, it refuses. Reproduce everything: clone the fork, run <code>node shipgate/prove.mjs</code>.
+  </footer>
+</main>
+
+<script type="module">
+  import { parseBrief, checkBrief, checkCanon, parseVerdict, checkGrounding, groundingStats } from './shipgate/gates.mjs';
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const show = (el, result) => {
+    el.innerHTML = result.ok
+      ? '<span class="pass">PASS</span>  every check holds'
+      : result.refusals.map(r => `<span class="refused">REFUSED</span>  ${esc(r)}`).join('\n');
+  };
+  const fetchText = async (path, fallback = '') => {
+    try { const r = await fetch(path); return r.ok ? await r.text() : fallback; } catch { return fallback; }
+  };
+
+  // ---- the board + the number ----
+  const cardsRaw = await fetchText('./data/cards.jsonl');
+  const cards = cardsRaw.split('\n').filter(l => l.trim()).map(l => JSON.parse(l));
+  const stats = groundingStats(cards);
+  $('number').textContent = stats.headline;
+  const tbody = document.querySelector('#board tbody');
+  for (const c of cards) {
+    const proof = c.grounding ? `${c.grounding.grounded}/${c.grounding.claims} claims grounded` : 'no proof chain';
+    const meas = c.measurement ? ` · ${c.measurement.value} ${c.measurement.unit} (${esc(c.measurement.source)})` : '';
+    const ev = c.evidence ? ` · <a href="${c.evidence}">evidence</a>` : '';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><code>${c.id}</code></td>
+      <td><span class="pill ${c.status}">${c.status}</span></td>
+      <td>${esc(c.channel)} · ${esc(c.topic)}${ev}${meas}<details><summary>history</summary><pre>${esc((c.history || []).join('\n'))}</pre></details></td>
+      <td>${c.guardian_score ?? '?'}</td><td>${proof}</td>`;
+    tbody.appendChild(tr);
+  }
+
+  // ---- canon status (G2) ----
+  const canonFiles = {
+    'brand/voice-guide.md': await fetchText('./brand/voice-guide.md', null),
+    'brand/rules.md': await fetchText('./brand/rules.md', null),
+  };
+  const canon = checkCanon(canonFiles);
+  $('canon').textContent = canon.ok
+    ? 'G2 canon check: filled, zero placeholders. The writer may start.'
+    : 'G2 canon check: ' + canon.refusals[0];
+
+  // ---- the lab ----
+  $('brief-input').value = await fetchText('./briefs/2026-08-13-launch-post.md', 'brief failed to load');
+  $('draft-input').value = await fetchText('./shipgate/fixtures/draft-ungrounded.md', 'draft failed to load');
+  $('verdict-input').value = await fetchText('./shipgate/fixtures/verdict-85.md', 'verdict failed to load');
+
+  $('run-g1').onclick = () => show($('out-g1'), checkBrief(parseBrief($('brief-input').value)));
+  $('run-g4').onclick = () => show($('out-g4'), checkGrounding($('draft-input').value, parseBrief($('brief-input').value)));
+  $('run-g3').onclick = () => show($('out-g3'), parseVerdict($('verdict-input').value));
+</script>
+</body>
+</html>

@@ -8,6 +8,8 @@
 
 ## What doesn't
 
+- The console's first deploy used an off-token red and green for REFUSED/PASS (2026-08-13). DESIGN.md is explicit: a second vivid color is a violation, not a variation. Fixed the same day: REFUSED speaks in ink, PASS earns the one accent, every gray derives from the muted token. Caught by reviewing the live deploy against the canon before announcing it.
+
 - Quoting a recognizable person's post verbatim inside the canon (2026-08-13). The operator rejected a voice-guide line that echoed a specific builder's exact words: too pointed. Rewritten as a description of the reader's scars instead. Twice = promote to brand/rules.md.
 
 ## Voice learnings

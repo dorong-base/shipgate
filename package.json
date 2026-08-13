@@ -1,0 +1,11 @@
+{
+  "name": "shipgate",
+  "version": "0.1.0",
+  "description": "No proof. No post. A fail-closed harness for the marketing-engineering starter: six deterministic gates that refuse instead of advising.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "prove": "node shipgate/prove.mjs",
+    "status": "node shipgate/cli.mjs status"
+  }
+}

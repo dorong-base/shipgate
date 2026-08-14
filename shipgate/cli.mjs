@@ -73,6 +73,11 @@ switch (cmd) {
 
   case 'new-card': {
     if (!id || !opts.brief) { console.error('usage: new-card <id> --brief <file>'); process.exit(1); }
+    const existing = getCard(cards, id);
+    if (existing) {
+      console.error(`\x1b[31mREFUSED\x1b[0m  new-card: card ${id} already exists (status: ${existing.status}): a card is created once, then advanced with draft/verdict/go; it is never recreated`);
+      process.exit(1);
+    }
     const briefCheck = checkBrief(parseBrief(readFileSync(`${ROOT}/${opts.brief}`, 'utf8')));
     if (!briefCheck.ok) refuse(briefCheck, null, null);
     const brief = parseBrief(readFileSync(`${ROOT}/${opts.brief}`, 'utf8'));

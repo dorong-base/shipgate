@@ -65,7 +65,9 @@ switch (cmd) {
       const g = c.grounding ? `${c.grounding.grounded}/${c.grounding.claims} grounded` : 'no proof chain';
       console.log(`  ${c.id}  [${c.status.padEnd(8)}]  ${c.channel} · ${c.topic} · score:${c.guardian_score ?? '?'} · ${g}${c.measurement ? ` · ${c.measurement.value} ${c.measurement.unit}` : ''}`);
     }
-    console.log(`\n  THE NUMBER: ${stats.headline}\n`);
+    console.log(`\n  THE NUMBER: ${stats.headline}`);
+    const fired = cards.reduce((n, c) => n + (c.history || []).filter(h => h.includes('REFUSED')).length, 0);
+    console.log(`  REFUSALS FIRED: ${fired} on real runs, each one logged on its card (a gate that never fires proves nothing)\n`);
     break;
   }
 

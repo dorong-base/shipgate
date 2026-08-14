@@ -54,7 +54,8 @@
 
   <div class="number">
     <div class="label">The one number: grounding rate</div>
-    <div class="value" id="number">loading the cards…</div>
+    <div class="value" id="number">…</div>
+    <div class="label" id="refusals"></div>
   </div>
 
   <h2>The board</h2>
@@ -106,10 +107,15 @@
   };
 
   // ---- the board + the number ----
-  const cardsRaw = await fetchText('./data/cards.jsonl');
-  const cards = cardsRaw.split('\n').filter(l => l.trim()).map(l => JSON.parse(l));
+  const cardsRaw = await fetchText('./data/cards.jsonl', null);
+  if (cardsRaw == null) {
+    $('number').textContent = 'could not load data/cards.jsonl (the store the CLI writes)';
+  }
+  const cards = (cardsRaw || '').split('\n').filter(l => l.trim()).map(l => JSON.parse(l));
   const stats = groundingStats(cards);
-  $('number').textContent = stats.headline;
+  if (cardsRaw != null) $('number').textContent = stats.headline;
+  const fired = cards.reduce((n, c) => n + (c.history || []).filter(h => h.includes('REFUSED')).length, 0);
+  $('refusals').textContent = `refusals fired on real runs: ${fired}. A gate that never fires proves nothing; each refusal is logged on its card.`;
   const tbody = document.querySelector('#board tbody');
   for (const c of cards) {
     const proof = c.grounding ? `${c.grounding.grounded}/${c.grounding.claims} claims grounded` : 'no proof chain';

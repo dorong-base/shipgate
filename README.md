@@ -25,7 +25,7 @@ node shipgate/prove.mjs
 | G5 | "shipped" is claimed without an evidence URL (approved is not shipped) |
 | G6 | "done" is claimed without a real measurement (shipped is not done) |
 
-Operator flow: `skills/shipgate/SKILL.md`. The gap, the forks reviewed, and every modified-file justification: `docs/DECISION.md`. This repository was imported rather than GitHub-forked so it could stay private during the assignment window; upstream is `blutrich/marketing-engineering-starter` @ `2e643ce`, pinned in `shipgate/upstream-manifest.json`. prove.mjs fails if more than 5 starter files change.
+Operator flow: `skills/shipgate/SKILL.md`. The gap, the forks reviewed, and every modified-file justification: `docs/DECISION.md`. Upstream is `blutrich/marketing-engineering-starter` @ `2e643ce`, pinned in `shipgate/upstream-manifest.json`; prove.mjs fails if more than 5 starter files change.
 
 ## The 4 layers, mapped to files
 

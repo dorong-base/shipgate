@@ -1,7 +1,7 @@
 # Decision doc: shipgate
 
 > No proof. No post. A fail-closed harness for the marketing-engineering starter.
-> Fork: github.com/dorong-base/shipgate (private, oferbl@base44.com invited) · Live: https://shipgate-five.vercel.app · Prove it: `node shipgate/prove.mjs`
+> Fork: github.com/dorong-base/shipgate (public fork of blutrich/marketing-engineering-starter) · Live: https://shipgate-five.vercel.app · Prove it: `node shipgate/prove.mjs`
 
 ## The gap, and why this one first
 
@@ -27,7 +27,7 @@ Public forks reviewed: exactly two, both by the same author. `ori-a-cohen/base44
 
 ## The broken promises, named
 
-**First, and the one we fix as the core of this fork.** README, first paragraph: "a router that refuses… a writer that can't start… a guardian that blocks anything below 9/10." The code does none of it. Worse, the promise contradicts the repo's own spec: `brand/rules.md` and `agents/brand-guardian.md` both say a 7 to 8 draft gets fixed inline by the guardian and released. So "blocks anything below 9/10" was not just unenforced, it was disagreed with, in writing, two files away. Our call: **fix it, and side with the README.** G1 makes the router's refusal real, G2 makes the writer's hard gate real, G3 makes the guardian's block real: it parses the existing brand-guardian verdict format (its file untouched) and refuses any recorded score below 9, including a "fixed-and-approved" 8. The first paragraph is true in this fork for the first time. `node shipgate/prove.mjs` attacks every gate with the exact shortcut it exists to refuse and expects REFUSED, twenty proofs, offline.
+**First, and the one we fix as the core of this fork.** README, first paragraph: "a router that refuses… a writer that can't start… a guardian that blocks anything below 9/10." The code does none of it. Worse, the promise contradicts the repo's own spec: `brand/rules.md` and `agents/brand-guardian.md` both say a 7 to 8 draft gets fixed inline by the guardian and released. So "blocks anything below 9/10" was not just unenforced, it was disagreed with, in writing, two files away. Our call: **fix it, and side with the README.** G1 makes the router's refusal real, G2 makes the writer's hard gate real, G3 makes the guardian's block real: it parses the existing brand-guardian verdict format (its file untouched) and refuses any recorded score below 9, including a "fixed-and-approved" 8. The first paragraph is true in this fork for the first time. And it fired on our own work: this fork's launch post scored 8 on its first pass, exactly the score upstream's spec releases, and G3 refused it. The refusal, the revision and the 9.5 that followed are recorded on card launch-001, which is also why the refusals counter on the board starts at 1 and not at 0. `node shipgate/prove.mjs` attacks every gate with the exact shortcut it exists to refuse and expects REFUSED, twenty proofs, offline.
 
 **Second, fixed with zero modified files.** The README maps the entire Visibility layer to `activity-log.md` ("every run appends one line") and `hooks/log-run.sh` claims "history writes itself. Nobody decides to log it. The system can't forget." But `activity-log.md` does not exist in the starter, nothing calls log-run.sh, and there is no `.claude/settings.json` to wire it. A documented layer that never ran. In this fork every CLI gate crossing, including refusals, appends to `activity-log.md` in log-run.sh's own format, and a PreToolUse hook blocks hand-edits to the card store. log-run.sh itself: untouched.
 

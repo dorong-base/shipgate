@@ -8,9 +8,11 @@ Clone it, fill in YOUR brand, and you have the framework running: a router that 
 
 The paragraph above makes three promises: a router that **refuses**, a writer that **can't start**, a guardian that **blocks**. Upstream, they are prose. In this fork they are gates: six deterministic checks that refuse instead of advising, plus an adversarial GO/NO-GO agent before anything publishes.
 
-**Prove it on a fresh clone, zero API keys, zero installs:**
+**Prove it on a fresh clone, zero API keys, zero installs** (requires Node 18 or newer, nothing else):
 
 ```bash
+git clone https://github.com/dorong-base/shipgate.git
+cd shipgate
 node shipgate/prove.mjs
 ```
 

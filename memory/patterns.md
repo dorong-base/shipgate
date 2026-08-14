@@ -8,6 +8,8 @@
 
 ## What doesn't
 
+- A human re-reader rejected what every gate had passed (2026-08-14): the launch post's gate list named the adversarial GO while omitting G5, and its closing line was navigation, not a CTA. The gates count numbers, not meaning; only a human counts a list item by item. Recorded per the loop; the card walked back through the new `revise` command and re-earned every gate. Candidate rule: a sentence that claims "N of X" gets audited item by item before the guardian scores it.
+
 - The console's first deploy used an off-token red and green for REFUSED/PASS (2026-08-13). DESIGN.md is explicit: a second vivid color is a violation, not a variation. Fixed the same day: REFUSED speaks in ink, PASS earns the one accent, every gray derives from the muted token. Caught by reviewing the live deploy against the canon before announcing it.
 
 - Quoting a recognizable person's post verbatim inside the canon (2026-08-13). The operator rejected a voice-guide line that echoed a specific builder's exact words: too pointed. Rewritten as a description of the reader's scars instead. Twice = promote to brand/rules.md.

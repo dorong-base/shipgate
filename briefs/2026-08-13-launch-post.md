@@ -18,7 +18,7 @@ proof_points:
     claim: "the failure mode is already in the starter's own example data: card cc-003 stalled on an unverified metric"
     source: "data/content-cards.example.jsonl line 3 (upstream): 'guardian: 7 - unverified metric in tweet 3'"
   - id: P5
-    claim: "this fork modified 3 of the 5 starter files the assignment allows; a gate enforces the budget"
+    claim: "this fork modified 3 of the 5 starter files it budgets; a gate enforces the limit"
     source: "shipgate/upstream-manifest.json + prove.mjs G7 output"
   - id: P6
     claim: "zero dependencies — plain markdown plus Node stdlib"
@@ -27,7 +27,7 @@ proof_points:
     claim: "the first brand rule in this fork was born from a real human rejection on day one"
     source: "memory/patterns.md, voice learnings entry dated 2026-08-13 (the em dash ban)"
 ---
-The launch post for shipgate itself. This card is the assignment's real marketing
+The launch post for shipgate itself. This card is the fork's real marketing
 artifact: it goes through the existing brand-guardian, its verdict is recorded here,
 a human posts it on LinkedIn, and its real measurement (impressions) closes the loop.
 The post that announces the gates cannot go out without passing them.

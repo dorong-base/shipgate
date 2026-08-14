@@ -11,7 +11,7 @@ The starter's README opens with three promises: a router that **refuses** to wri
 
 Upstream ships the 4-layer architecture, prompt-level agents, a fill-in brand canon, a jsonl entity shape (status · guardian score · evidence) that no code reads, and one logging hook that nothing wires. The repo's own opinions point at what is missing: the entity shape says "approved is not shipped", the iron laws say "no invented facts", and the first paragraph promises refusal. None of it is enforced.
 
-Public forks reviewed: exactly two, both by the same author. `ori-a-cohen/base44-marketing-os` ("Roundtrip") is a strong, complete build: content-level lint hooks (vocabulary, design tokens), a rendering pipeline, measurement adapters, and a loop-closure metric on a hosted board. `oriqualia/base44-marketing-os` is an untouched fork. Roundtrip enforces **content** and measures **outcomes**. Nobody, upstream or fork, enforces **process**: brief before draft, verdict before approval, evidence before shipped, measurement before done. Roundtrip answers "did it work?"; shipgate answers "did it deserve to ship?". That is why this gap is next, not a duplicate.
+Public forks reviewed (excluding this one): exactly two, both by the same author. `ori-a-cohen/base44-marketing-os` ("Roundtrip") is a strong, complete build: content-level lint hooks (vocabulary, design tokens), a rendering pipeline, measurement adapters, and a loop-closure metric on a hosted board. `oriqualia/base44-marketing-os` is an untouched fork. Roundtrip enforces **content** and measures **outcomes**. Nobody, upstream or fork, enforces **process**: brief before draft, verdict before approval, evidence before shipped, measurement before done. Roundtrip answers "did it work?"; shipgate answers "did it deserve to ship?". That is why this gap is next, not a duplicate.
 
 ## The one number
 
@@ -51,4 +51,4 @@ At the 24-hour mark (2026-08-14 07:56), nothing arrived. I flagged it in writing
 
 ## Workflow, in one line
 
-Claude (Anthropic's Cowork) drove research, planning and code; Doron drove every decision, rejection, commit and the publish button. The rejections are in `memory/patterns.md`; the plan-first workflow is visible in the commit history.
+Claude (Anthropic's Cowork) drove research, planning and code; I drove every decision, rejection, commit and the publish button. The rejections are in `memory/patterns.md`; the plan-first workflow is visible in the commit history.

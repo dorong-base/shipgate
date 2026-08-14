@@ -139,8 +139,26 @@ switch (cmd) {
     break;
   }
 
+  // revise: the learning loop's missing primitive. When a human rejects what
+  // the gates passed (CLAUDE.md: record it), the card walks BACK to drafted
+  // with the reason on its history, and re-earns every gate from there.
+  // Not allowed once shipped: the world already saw it; that's what measure is for.
+  case 'revise': {
+    const card = must(id);
+    if (!opts.reason) { console.error('usage: revise <id> --reason "<why the human rejected it>"'); process.exit(1); }
+    if (!['gated', 'go'].includes(card.status)) {
+      refuse({ refusals: [`revise: only a gated or go card can walk back (this one is ${card.status}). shipped is a one-way door; drafted has nothing to walk back from.`] }, card, cards);
+    }
+    card.status = 'drafted';
+    card.guardian_score = null;
+    delete card.verdict;
+    delete card.grounding;
+    pass(card, cards, `REVISED by human: ${opts.reason} — back to drafted; every gate must be re-earned (record the reason in memory/patterns.md)`);
+    break;
+  }
+
   default:
-    console.log('shipgate: No proof. No post.\ncommands: status · new-card · draft · verdict · go · ship · measure');
+    console.log('shipgate: No proof. No post.\ncommands: status · new-card · draft · verdict · go · ship · revise · measure');
     process.exit(cmd ? 1 : 0);
 }
 

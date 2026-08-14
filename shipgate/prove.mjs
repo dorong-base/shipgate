@@ -119,7 +119,7 @@ record('state', 'briefed → go (three gates skipped) is refused in the engine i
 // ---------- the one number ----------
 
 r = cli(['status']);
-record('NUMBER', 'grounding rate reads "1 of 1 published claims carry a cited source"', r.out.includes('1 of 1 published claims carry a cited source'), r.out.match(/THE NUMBER.*/)?.[0]);
+record('NUMBER', 'on the synthetic demo card, grounding rate reads "1 of 1 published claims carry a cited source"', r.out.includes('1 of 1 published claims carry a cited source'), r.out.match(/THE NUMBER.*/)?.[0]);
 
 // ---------- G7 · the diff gate (we gate ourselves) ----------
 

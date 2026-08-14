@@ -17,7 +17,7 @@ Public forks reviewed (excluding this one): exactly two, both by the same author
 
 **Grounding rate: of the claims we published, how many carry a cited source.** Reported live on the board as "N of M published claims carry a cited source", alongside the count of refusals fired on real runs, because a gate that never fires proves nothing: the refusals are the evidence the engine is alive, the rate is the evidence it works. It starts at zero with a confession: one legacy card (the starter's own example) shipped with no proof chain, and the board names it rather than hiding it. The number can only rise by shipping through the gates, because G4 refuses any number in a draft that lacks a [P#] marker resolving to a sourced proof point in the brief. G4 is not a rule we invented: it is `brand/rules.md` rule 4 ("every number traces to a real source, no source = cut"), which until now was a polite request to an LLM. Rule 4 existed as a request; shipgate makes it a refusal.
 
-<!-- TODO day 3: paste the measured launch-post row here (impressions value, source, recorded_by) -->
+**Measurement:** the launch-post card is open at the time of writing. It closes only when the real impressions land through G6 (value, unit, source, recorded_by), and this line becomes the measured row.
 
 ## What we deliberately did NOT build
 

@@ -34,10 +34,10 @@ function refuse(result, card, cards) {
   process.exit(1);
 }
 
-function pass(card, cards, line) {
+function pass(card, cards, line, statusLabel) {
   logHistory(card, line);
   saveCards(CARDS, cards);
-  logActivity(ROOT, card.channel, card.topic, card.status);
+  logActivity(ROOT, card.channel, card.topic, statusLabel || card.status);
   console.log(`\x1b[32mPASS\x1b[0m     ${card.id} → ${card.status} · ${line}`);
 }
 
@@ -118,7 +118,8 @@ switch (cmd) {
     const t = transition(card, 'go', { grounding, gonogo });
     if (!t.ok) refuse(t, card, cards);
     card.draft = opts.draft;
-    pass(card, cards, `G4 + GO/NO-GO passed: ${grounding.grounded}/${grounding.claims} claims grounded, adversarial verdict GO`);
+    // Name the files: a crossing that doesn't say who blessed it invites doubt.
+    pass(card, cards, `G4 + GO/NO-GO passed: ${grounding.grounded}/${grounding.claims} claims grounded, adversarial verdict GO (draft: ${opts.draft}, gonogo: ${opts.gonogo})`);
     break;
   }
 
@@ -153,7 +154,7 @@ switch (cmd) {
     card.guardian_score = null;
     delete card.verdict;
     delete card.grounding;
-    pass(card, cards, `REVISED by human: ${opts.reason} — back to drafted; every gate must be re-earned (record the reason in memory/patterns.md)`);
+    pass(card, cards, `REVISED by human: ${opts.reason} — back to drafted; every gate must be re-earned (record the reason in memory/patterns.md)`, 'REVISED (human)');
     break;
   }
 

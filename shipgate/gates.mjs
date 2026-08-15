@@ -10,11 +10,16 @@
 //
 // Zero dependencies. Node stdlib only. Runs identically in CLI, tests and browser.
 
+// Windows checkouts materialize CRLF; every text entry point normalizes to LF,
+// because a line ending is not a semantic difference.
+const lf = (s) => String(s).replace(/\r\n/g, '\n');
+
 const BRIEF_FIELDS = ['channel', 'topic', 'audience', 'message', 'cta'];
 
 // ---------- brief parsing (G1) ----------
 
 export function parseBrief(text) {
+  text = lf(text);
   const m = text.match(/^---\n([\s\S]*?)\n---/);
   if (!m) return { error: 'no frontmatter block (--- ... ---) found' };
   const lines = m[1].split('\n');
@@ -77,7 +82,7 @@ export function checkCanon(files, { visual = false } = {}) {
   for (const path of required) {
     const raw = files[path];
     if (raw == null) { refusals.push(`G2: ${path} is missing`); continue; }
-    const content = raw.replace(/```[\s\S]*?```/g, ''); // format examples are not placeholders
+    const content = lf(raw).replace(/```[\s\S]*?```/g, ''); // format examples are not placeholders
     // Placeholder = [bracketed text] that is not a markdown link, or CHANGE_ME.
     const brackets = [...content.matchAll(/\[([^\]\n]{1,80})\]/g)]
       .filter(x => {
@@ -97,6 +102,7 @@ export function checkCanon(files, { visual = false } = {}) {
 // agents/brand-guardian.md already promises to end with. We read its format;
 // we never touch its file.
 export function parseVerdict(text) {
+  text = lf(text);
   const m = text.match(/Score:\s*(\d+(?:\.\d+)?)\s*\/\s*10\s*[—–-]+\s*\[?\s*(approved|fixed-and-approved|rejected)\s*\]?/i);
   const failed = text.match(/Failed rules:\s*(.+)/i);
   if (!m) return { gate: 'G3', ok: false, refusals: ['G3: no verdict block found: the guardian must end with "Score: X/10 — [status]"'] };
@@ -119,7 +125,7 @@ export function checkGrounding(draft, brief) {
   const refusals = [];
   let claims = 0, grounded = 0;
 
-  const cleaned = draft
+  const cleaned = lf(draft)
     .replace(/```[\s\S]*?```/g, '')                 // code blocks are not claims
     .replace(/https?:\/\/\S+/g, '')                  // URLs are addresses, not claims
     .replace(/\]\([^)]*\)/g, ']');                   // markdown link targets
@@ -148,6 +154,7 @@ export function checkGrounding(draft, brief) {
 // ---------- GO / NO-GO (final adversarial gate) ----------
 
 export function parseGoNoGo(text) {
+  text = lf(text);
   const m = text.match(/Verdict:\s*(GO|NO-GO)\b/i);
   if (!m) return { ok: false, refusals: ['GO/NO-GO: no "Verdict: GO" or "Verdict: NO-GO" line found'] };
   const go = m[1].toUpperCase() === 'GO';

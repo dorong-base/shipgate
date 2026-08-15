@@ -49,6 +49,6 @@ I work in technical support at Base44. Everything used here is public: the start
 
 At the 24-hour mark (2026-08-14 07:56), nothing arrived. I flagged it in writing at 10:29. The reply came at 11:48, four words: "You can keep building." We treated that as the input, because it is one: the most realistic brief update there is, the stakeholder gives you nothing and the decision stays yours. So it is recorded here with its timestamps, nothing was changed that we could not justify ourselves, and the pipeline kept moving. If a fuller input still lands before submission, this section gets a dated update and the commits that absorbed it.
 
-## Workflow, in one line
+## Workflow
 
-Claude (Anthropic's Cowork) drove research, planning and code; I drove every decision, rejection, commit and the publish button. The rejections are in `memory/patterns.md`; the plan-first workflow is visible in the commit history.
+Claude (Anthropic's Cowork) drove research, planning and code. A second, independent Claude session served as an adversarial reviewer: its only job was to attack the plan and the deliverables between milestones, and its best catches are on the record, including the walk-back to revision 3 after a GO, the crossings-name-their-files fix, and the pre-publish scrub. The same never-self-review principle the system enforces on content was applied to the workflow that built it. I drove every decision, rejection, commit and the publish button. The rejections are in `memory/patterns.md`; the plan-first workflow is visible in the commit history.

@@ -118,7 +118,7 @@
   $('refusals').textContent = `refusals fired on real runs: ${fired}. A gate that never fires proves nothing; each refusal is logged on its card.`;
   const tbody = document.querySelector('#board tbody');
   for (const c of cards) {
-    const proof = c.grounding ? `${c.grounding.grounded}/${c.grounding.claims} claims grounded` : 'no proof chain';
+    const proof = c.grounding ? `${c.grounding.grounded}/${c.grounding.claims} claims grounded${c.grounding.waived ? ` · ${c.grounding.waived} waived` : ''}` : 'no proof chain';
     const meas = c.measurement ? ` · ${c.measurement.value} ${c.measurement.unit} (${esc(c.measurement.source)})` : '';
     // Legacy cards (no brief = imported example data) never render a live link:
     // a board about evidence must not link to evidence that does not exist.

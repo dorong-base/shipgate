@@ -17,6 +17,8 @@ Public forks reviewed (excluding this one): exactly two, both by the same author
 
 **Grounding rate: of the claims we published, how many carry a cited source.** Reported live on the board as "N of M published claims carry a cited source", alongside the count of refusals fired on real runs, because a gate that never fires proves nothing: the refusals are the evidence the engine is alive, the rate is the evidence it works. It starts at zero with a confession: one legacy card (the starter's own example) shipped with no proof chain, and the board names it rather than hiding it. The number can only rise by shipping through the gates, because G4 refuses any number in a draft that lacks a [P#] marker resolving to a sourced proof point in the brief. G4 is not a rule we invented: it is `brand/rules.md` rule 4 ("every number traces to a real source, no source = cut"), which until now was a polite request to an LLM. Rule 4 existed as a request; shipgate makes it a refusal.
 
+Hardened hours before submission: an adversarial audit (the exact audit the launch post invites) found the original attribution inflatable, since one marker blessed its whole paragraph and waived numbers entered the sourced count. G4 now attributes markers per number and counts waivers as a third category: counted, shown, never sourced. Nothing on display changed; only what the gate refuses did. The finding and the fix are recorded in `memory/patterns.md`.
+
 **Measurement, landed:** card launch-001 closed as measured on 2026-08-15. The real launch post did 478 impressions in its first 24 hours (unit: impressions · source: `data/launch-001-linkedin-analytics-2026-08-15.xlsx`, the official LinkedIn analytics export, checked into this repo · recorded_by: Doron Gomel). The G6 crossing happened live, on camera, in the submission recording, right after the same command was refused for missing a source.
 
 ## What we deliberately did NOT build
@@ -24,6 +26,10 @@ Public forks reviewed (excluding this one): exactly two, both by the same author
 1. **No auto-publishing.** Publishing is a one-way door, so a human posts and records the evidence URL; the system can refuse to bless, it never acts outward.
 2. **No LLM inside the gates.** Deterministic checks only, so the entire harness proves itself on a fresh clone with zero API keys, zero flakiness, in one command.
 3. **No board or measurement suite.** Roundtrip already built that well; duplicating it would add surface area, not proof. Our console shows exactly one number and the cards behind it.
+
+## Declared limits
+
+G5 validates the shape of evidence (a URL), not its reachability: no network inside the gates is the price of offline determinism. G3 and the GO/NO-GO validate that a verdict was recorded in the required form and that a sub-9 verdict cannot pass; they do not validate that the verdict is honest. Honesty is the adversarial reviewer's job and, ultimately, the measurement's.
 
 ## The broken promises, named
 

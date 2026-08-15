@@ -117,38 +117,45 @@ export function parseVerdict(text) {
 
 // ---------- grounding (G4) ----------
 
-// G4: Every number in the draft must carry a [P#] marker that resolves to a
-// proof point with a source in the brief. sdd-kit's hard rule 12, transplanted:
-// ground data-dependent decisions in real samples.
+// G4: Every number in the draft must carry its own [P#] marker resolving to a
+// proof point with a source in the brief (sdd-kit's hard rule 12, transplanted).
+// Markers attach positionally: a marker covers the numbers before it, back to
+// the previous marker or waiver. A [no-claim: reason] waives the numbers before
+// it; waived numbers are counted and shown, and never enter the sourced count.
+// One marker cannot bless a whole paragraph; every number earns its own coverage.
 export function checkGrounding(draft, brief) {
   const ids = new Set((brief.proof_points || []).map(p => p.id));
   const refusals = [];
-  let claims = 0, grounded = 0;
+  let claims = 0, grounded = 0, waived = 0;
 
   const cleaned = lf(draft)
     .replace(/```[\s\S]*?```/g, '')                 // code blocks are not claims
     .replace(/https?:\/\/\S+/g, '')                  // URLs are addresses, not claims
     .replace(/\]\([^)]*\)/g, ']');                   // markdown link targets
 
-  const paragraphs = cleaned.split(/\n{2,}/);
-  for (const para of paragraphs) {
-    const tokens = [...para.matchAll(/(?<![\w/-])\$?\d[\d,.]*%?/g)].map(t => t[0]);
-    if (tokens.length === 0) continue;
-    const markers = [...para.matchAll(/\[(P\d+)\]/g)].map(x => x[1]);
-    const noClaim = /\[no-claim:[^\]]+\]/.test(para);
-    claims += tokens.length;
-    const unresolved = markers.filter(id => !ids.has(id));
-    if (unresolved.length > 0) {
-      refusals.push(`G4: marker [${unresolved.join('], [')}] does not resolve to any proof point in the brief`);
-    } else if (markers.length > 0) {
-      grounded += tokens.length;
-    } else if (noClaim) {
-      grounded += tokens.length;                     // explicitly waived, logged, visible
-    } else {
-      refusals.push(`G4: ungrounded number${tokens.length > 1 ? 's' : ''} ${tokens.map(t => `"${t}"`).join(', ')}: add a [P#] marker or cut the claim (no source = cut, don't soften)`);
+  for (const para of cleaned.split(/\n{2,}/)) {
+    const events = [...para.matchAll(/(?<![\w/-])\$?\d[\d,.]*%?|\[(P\d+)\]|\[no-claim:[^\]]+\]/g)];
+    let pending = [];
+    for (const ev of events) {
+      if (ev[1]) {                                   // a [P#] marker
+        if (!ids.has(ev[1])) {
+          refusals.push(`G4: marker [${ev[1]}] does not resolve to any proof point in the brief`);
+          claims += pending.length; pending = [];
+        } else {
+          claims += pending.length; grounded += pending.length; pending = [];
+        }
+      } else if (ev[0].startsWith('[no-claim:')) {   // an explicit waiver
+        waived += pending.length; pending = [];
+      } else {
+        pending.push(ev[0]);                          // a numeric claim awaiting coverage
+      }
+    }
+    if (pending.length) {
+      claims += pending.length;
+      refusals.push(`G4: ungrounded number${pending.length > 1 ? 's' : ''} ${pending.map(t => `"${t}"`).join(', ')}: add a [P#] marker after each claim or waive it with [no-claim: reason] (no source = cut, don't soften)`);
     }
   }
-  return { gate: 'G4', ok: refusals.length === 0, refusals, claims, grounded };
+  return { gate: 'G4', ok: refusals.length === 0, refusals, claims, grounded, waived };
 }
 
 // ---------- GO / NO-GO (final adversarial gate) ----------
@@ -189,7 +196,7 @@ export function transition(card, to, ctx = {}) {
     case 'go': {
       if (!ctx.grounding?.ok) return refuse(ctx.grounding?.refusals || ['G4: no grounding check recorded']);
       if (!ctx.gonogo?.ok) return refuse(ctx.gonogo?.refusals || ['GO/NO-GO: no adversarial verdict recorded: the final sign-off is never the checker grading its own work']);
-      card.grounding = { claims: ctx.grounding.claims, grounded: ctx.grounding.grounded };
+      card.grounding = { claims: ctx.grounding.claims, grounded: ctx.grounding.grounded, waived: ctx.grounding.waived || 0 };
       break;
     }
     case 'shipped': {
@@ -220,18 +227,19 @@ export function transition(card, to, ctx = {}) {
 // Grounding rate: of the claims we published, how many carry a cited source.
 // Legacy cards (shipped before shipgate, no proof chain) are named, not hidden.
 export function groundingStats(cards) {
-  let claims = 0, grounded = 0, unverifiable = 0;
+  let claims = 0, grounded = 0, waived = 0, unverifiable = 0;
   for (const c of cards) {
     if (!['shipped', 'measured'].includes(c.status)) continue;
-    if (c.grounding) { claims += c.grounding.claims; grounded += c.grounding.grounded; }
+    if (c.grounding) { claims += c.grounding.claims; grounded += c.grounding.grounded; waived += c.grounding.waived || 0; }
     else unverifiable++;
   }
   return {
-    claims, grounded, unverifiable,
+    claims, grounded, waived, unverifiable,
     rate: claims === 0 ? null : grounded / claims,
     headline: (claims === 0
       ? 'no gated claims published yet'
       : `${grounded} of ${claims} published claims carry a cited source`) +
+      (waived ? ` (${waived} waived: counted, shown, never sourced)` : '') +
       (unverifiable ? ` (${unverifiable} legacy card${unverifiable > 1 ? 's' : ''} shipped with no proof chain: named, not counted)` : ''),
   };
 }

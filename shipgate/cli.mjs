@@ -62,7 +62,7 @@ switch (cmd) {
     const stats = groundingStats(cards);
     console.log(`\nshipgate: No proof. No post.\n`);
     for (const c of cards) {
-      const g = c.grounding ? `${c.grounding.grounded}/${c.grounding.claims} grounded` : 'no proof chain';
+      const g = c.grounding ? `${c.grounding.grounded}/${c.grounding.claims} grounded${c.grounding.waived ? ` · ${c.grounding.waived} waived` : ''}` : 'no proof chain';
       console.log(`  ${c.id}  [${c.status.padEnd(8)}]  ${c.channel} · ${c.topic} · score:${c.guardian_score ?? '?'} · ${g}${c.measurement ? ` · ${c.measurement.value} ${c.measurement.unit}` : ''}`);
     }
     console.log(`\n  THE NUMBER: ${stats.headline}`);

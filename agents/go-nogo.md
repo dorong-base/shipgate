@@ -21,4 +21,4 @@ Verdict: GO | NO-GO
 Checks: [one line per gate checked, with the evidence you saw]
 ```
 
-A NO-GO reports each failed gate with the offending line quoted. Never softened. There is no "GO with notes" — notes mean NO-GO.
+A NO-GO reports each failed gate with the offending line quoted. Never softened. There is no "GO with notes". Notes mean NO-GO.

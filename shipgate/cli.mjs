@@ -154,7 +154,7 @@ switch (cmd) {
     card.guardian_score = null;
     delete card.verdict;
     delete card.grounding;
-    pass(card, cards, `REVISED by human: ${opts.reason} — back to drafted; every gate must be re-earned (record the reason in memory/patterns.md)`, 'REVISED (human)');
+    pass(card, cards, `REVISED by human: ${opts.reason}. Back to drafted; every gate must be re-earned (record the reason in memory/patterns.md)`, 'REVISED (human)');
     break;
   }
 

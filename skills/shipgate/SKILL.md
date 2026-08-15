@@ -3,7 +3,7 @@ name: shipgate
 description: The fail-closed harness for the execution pipeline. Triggers on any request to approve, publish, ship, post, record a verdict, or measure content, and on "run the gates", "shipgate", "prove it". Gates refuse instead of advising; a REFUSED exit is a stop, not an obstacle.
 ---
 
-# shipgate — No proof. No post.
+# shipgate: No proof. No post.
 
 The starter's content flow, with its promises enforced in code. The router still routes, the writer still writes, the brand-guardian still judges. shipgate is the harness underneath: every step's promise becomes a gate crossing, and the gate refuses instead of advising.
 
@@ -25,7 +25,7 @@ brief ──G1──> card ──G2──> draft ──G3──> gated ──G4+
 
 ## Iron laws
 
-- The engine is the only writer of `data/cards.jsonl`. Never edit a card by hand — a PreToolUse hook blocks it.
+- The engine is the only writer of `data/cards.jsonl`. Never edit a card by hand; a PreToolUse hook blocks it.
 - A REFUSED exit is a stop, not an obstacle. Fix the input; never fix the gate.
 - Drafts live in `drafts/`, verdicts in `verdicts/`, briefs in `briefs/`. The writer writes drafts only after G2 clears.
 - Publishing is a one-way door: a human posts, then records the evidence URL. The system never posts.
